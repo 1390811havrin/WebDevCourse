@@ -1,0 +1,106 @@
+
+
+#leftCol{
+ position: absolute;
+ display: flex;
+ flex-direction: column;
+ width: 10%;
+ left: 0;
+ bottom: 35%;
+ top: 0;
+background-color: aquamarine;
+padding-left: 3%;
+}
+
+
+
+#rTopCol{
+position: fixed;
+width: auto;
+left: 13%;
+bottom: 35%;
+top: 0;
+background-color: lightcoral;
+width: 90%;
+
+}
+
+#rBotCol{
+position: fixed;
+display: flex;
+flex-direction: column;
+
+left: 0;
+bottom: 0;
+top: 65%;
+background-color: lawngreen;
+width: 100%;
+}
+
+.tab{
+overflow: hidden;
+border: 1px solid #ccc;
+background-color:#f1f1f1;
+}
+.tab button{
+background-color: inherit;
+float: left;
+border: none; 
+outline: none;
+cursor: pointer;
+padding: 14px 16px;
+transition: 0.3s;
+font-size: 17px;
+}
+
+.tab button:hover {
+ background-color: #ddd;
+}
+.tab button.active{
+background-color: #ccc;
+
+}
+
+#Construct{
+    
+
+}
+
+#Deconstruct{
+
+
+}
+
+#SetWorkers{
+
+
+}
+
+.tabcontent{
+
+    display:none;
+    padding:6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+
+}
+
+.rBotChild{
+flex: 1;
+text-align: center;
+}
+
+li{
+   
+    margin-top: 25px;
+
+}
+
+/*
+1. want a div for left column
+2. another for everythign right of it
+3. inside of right dive there will be 2 divs top and bottom
+4. right div will control the sspacing for left column and right padding
+5. right->top div will control padding between top and bottom
+6. right->bottom div is just oging to have contents in it and if you need to do a seperate margin left right for the right div you can just do that htere.
+*/

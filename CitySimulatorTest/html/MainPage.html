@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MainPage</title>
+
+<link rel="stylesheet" type="text/css" href="../css/mainCss.css">
+</head>
+<body>
+
+    <div id="leftCol">
+        
+        <ul>
+            <h1>Menu</h1>
+            <li>Option1</li>
+            <li>Option2</li>
+            <li>Option3</li>
+            <li>Option4</li>
+            <li>Option5</li>
+            <li>Option6</li>
+        </ul>
+   
+    </div>
+
+
+            <p>rRightCol</p>
+        <div id="rTopCol">
+                
+
+        </div>
+
+        <div id="rBotCol">
+        <div class="tab">
+        <button class="tablinks" onclick="manageCity(event, 'Construct')">Construct</button>
+        <button class="tablinks" onclick="manageCity(event, 'Deconstruct')">Deconstruct</button>
+        <button class="tablinks" onclick="manageCity(event, 'SetWorkers')">SetWorkers</button>
+        </div>
+        <div id="Construct" class="tabcontent">
+            <label>Select Feat of Construction: </label>
+            <select>
+                <option value = "Build Military"> Build Military </option>
+                <option value = "Build Civic">Build Civic</option>
+                <option value = "Build Arcane"> Build Arcane</option> 
+                <option value = "Clear Land">Clear Land</option>
+                <option value = "Upgrade Building">Upgrade Building</option>
+            </select>
+            <br>
+
+        <input type="text" id="PlotofLand"><br>
+        <button type="submit" id="enter">Enter</button>
+
+        </div>
+
+
+        <div id="Deconstruct" class="tabcontent">
+                <h1>deconstruct</h1> 
+
+
+        </div>
+        <div id="SetWorkers" class="tabcontent">
+                <h1>set workers</h1> 
+        </div>
+        </div>
+<script>
+function manageCity(evt, work){
+var i, tabcontent, tablinks;
+tabcontent = document.getElementsByClassName("tabcontent");
+for(i = 0; i < tabcontent.length; i++){
+    tabcontent[i].style.display ="none";
+}
+tablinks= document.getElementsByClassName("tablinks");
+for(i = 0; i < tablinks.length; i++){
+tablinks[i].className = tablinks[i].className.replace(" active", "");
+}
+document.getElementById(work).style.display = "block";
+evt.currentTarget.className +=" active";
+}
+</script>
+<script src="../scripts/scripts.js"></script>
+</body>
+</html>
