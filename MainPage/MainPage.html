@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Main Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./CSS/bagua.css" />
+<script type="text/javascript" src="./JS/JS.js"></script>
+<style>
+
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-black w3-card" style="height:46px">
+        <label for="Population" class="w3-bar-item">Total Population:</label>
+        <a name="Population" id="Pop" class="w3-bar-item"> 0</a>
+        <label for="Workers" class="w3-bar-item">Workers:</label>
+        <a name="Workers" id="wPop" class="w3-bar-item"> 0</a>
+        <label for="Food" class="w3-bar-item">Food:</label>
+        <a name="Food" id="food" class="w3-bar-item"> 0</a>
+        <label for="BMats" class="w3-bar-item">Building Materials:</label>
+        <a name="BMats" id="BMats" class="w3-bar-item"> 0</a>
+        <label for="Security" class="w3-bar-item">Security:</label>
+        <a name="Security" id="Security" class="w3-bar-item"> 0</a>
+        <label for="Reknown" class="w3-bar-item">Reknown:</label>
+        <a name="Reknown" id="Reknown" class="w3-bar-item"> 0</a>
+        <label for="Rare" class="w3-bar-item">Rare Resources:</label>
+        <a name="Rare" id="Rare" class="w3-bar-item"> 0</a>
+        <label for="Date" class="w3-bar-item">Date:</label>
+        <a name="Date" id="Date" class="w3-bar-item"> 0/0/0000</a>
+      </div>
+</div>
+
+
+
+<!-- Page content -->
+<div id="tableContainer">
+
+    <div style="position: relative;">
+        <img id="background" src="./Images/hv.jpg">
+        <table id="bagua-table" style="position: absolute;top: 46px;border-collapse: collapse;">
+
+        </table>
+
+    </div>
+
+
+<!-- End Page Content -->
+</div>
+
+<div class="form-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h1>Build Action</h1>
+    <select>
+      <option value="Build">Build</option> 
+      <option value="Destroy">Destroy</option>
+      <option value="Upgrade">Upgrade</option>  
+    </select>
+    <select>
+      <option value="opt1">CurrentBuilding</option>
+      <option value="opt2">Blacksmith</option>
+      <option value="opt3">Baracks</option>
+      <option value="opt4">Wall</option>  
+    </select>
+    <h2>At</h2>
+    <label for="X"><b>X</b></label>
+    <input id="xinput" type="number" placeholder="X coord" name="X" required>
+    <br>
+    <label for="Y"><b>Y</b></label>
+    <input id="yinput" type="number" placeholder="Y coord" name="Y" required>
+
+    <button type="submit" class="btn">Do</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+<script>
+</script>
+</body>
+</html>
