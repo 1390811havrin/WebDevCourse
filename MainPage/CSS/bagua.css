@@ -23,6 +23,9 @@ body {
   height: 1201px;
 }
 
+#month{
+    text-align: right;
+}
 
 .mySlides {display: none}
 

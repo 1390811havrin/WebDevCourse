@@ -26,16 +26,16 @@ function getCookie(name) {
 }
 
 
-function loginUser(e){
+async function loginUser(e){
     console.log("Reaches loginValidate")
     e.preventDefault();
-    let emal = document.getElementById('addEml').value;
-    let pSW = document.getElementById('addPSW').value;
+    const emal = document.getElementById('addEml').value;
+    const pSW = document.getElementById('addPSW').value;
 
     
 
 
-        fetch('http://localhost:51299/api/Login',{
+       const fetchResult = fetch('http://localhost:51299/api/Login',{
             method:'Post',
             mode:'cors',
             headers:{
@@ -44,11 +44,11 @@ function loginUser(e){
                 'Content-type' : 'application/json'        
             },
             body:JSON.stringify({Email:emal, PSW:pSW})
-            })
-            .then((res)=>res.json())
-            .then((data)=>checkResponse(data))
-            .catch(error => alert('Error: Incorrect Login Credentials'));            
-   
-    //var check = getCookie("loginCookie");
+            })         
+    const response = await fetchResult;
+    const jsonData = await response.json();
+    //console.log(jsonData);
+    checkResponse(jsonData);
     //console.log(check);
 }
+
