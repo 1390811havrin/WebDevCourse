@@ -11,7 +11,7 @@
 }
 
 #bagua-table .highlight {
-  background: red;
+  background: rgb(36, 36, 117);
 }
 body {
   font-family: "Lato", sans-serif;
@@ -23,9 +23,7 @@ body {
   height: 1201px;
 }
 
-#month{
-    text-align: right;
-}
+
 
 .mySlides {display: none}
 
