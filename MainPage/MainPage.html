@@ -30,11 +30,19 @@
         <a name="Gold" id="Gold" class="w3-bar-item">0</a>
         <label for="Storage" class="w3-bar-item">Storage:</label>
         <a name="Storage" id="Storage" class="w3-bar-item"> 0</a>
-        <label for="Date" class="w3-bar-item">Date:</label>
+        <label for="Housing" class="w3-bar-item">Housing:</label>
+        <a name="Housing" id="Housing" class="w3-bar-item"> 10/10</a>
+        <label for="Moral" class="w3-bar-item">Moral:</label>
+        <a name="Moral" id="Moral" class="w3-bar-item"> Good</a>
+        <label for="Date" class="w3-bar-item">Local Date:</label>
         <a name="Date" id="Date" class="w3-bar-item"> 0/0/0000</a>
-
+        <label for="DateA" class="w3-bar-item">Game Date:</label>
+        <a name="DateA" id="DateA" class="w3-bar-item"> 0/0/0000</a>
+        <button id="GetToLeft" class="w3-bar-item" onclick="rollMonth()">End Month</button>
+        <a href="../MainPage/HelpPage.html" class="w3-bar-item">Info</a>
+        <a href="#" onclick="prepHref(this)" download>Download Image</a>
       </div>
-
+      
 </div>
 
 
@@ -66,7 +74,11 @@
       <option value="CurrentBuilding">CurrentBuilding</option>
       <option value="Blacksmith">Blacksmith</option>
       <option value="Baracks">Baracks</option>
-      <option value="Wall">Wall</option>  
+      <option value="Wall">Wall</option>
+      <option value="East Wall">East Wall</option>  
+      <option value="North Wall">North Wall</option>
+      <option value="South Wall">South Wall</option>
+      <option value="West Wall">West Wall</option>        
       <option value="Farm">Farm</option>  
     </select>
     <h2>At</h2>
@@ -80,6 +92,9 @@
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
+
+
+
 <script>
 
 </script>

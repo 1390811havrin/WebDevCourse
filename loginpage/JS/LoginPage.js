@@ -8,7 +8,7 @@ function setCookie(data) {
 
 function checkResponse(data){
         setCookie(data);
-        window.location.replace("http://127.0.0.1:5500/MainPage/MainPage.html");
+        window.location.replace("../MainPage/MainPage.html");
     
 }
 
@@ -24,8 +24,8 @@ function getCookie(name) {
 	}
 	return null;
 }
-
-
+//http://citybuilderapi.ddns.net:333/ORMTest
+//http://localhost:51299
 async function loginUser(e){
     console.log("Reaches loginValidate")
     e.preventDefault();
@@ -35,7 +35,7 @@ async function loginUser(e){
     
 
 
-       const fetchResult = fetch('http://localhost:51299/api/Login',{
+       const fetchResult = fetch('http://citybuilderapi.ddns.net:333/ORMTest/api/Login',{
             method:'Post',
             mode:'cors',
             headers:{

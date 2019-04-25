@@ -1,7 +1,7 @@
 
 window.onload = function OnLoad(){
     getImage();
-    console.log("document Loaded");
+    //console.log("document Loaded");
     let table = document.getElementById('bagua-table');
     
 
@@ -13,7 +13,7 @@ window.onload = function OnLoad(){
             if (target.tagName == 'TD') {
                 let x = target.id.split("_")[0];
                 let y = target.id.split("_")[1];
-                console.log("X: " + target.id.split("_")[0] + " Y: " + target.id.split("_")[1]);
+                //console.log("X: " + target.id.split("_")[0] + " Y: " + target.id.split("_")[1]);
                 openForm(x, y)
                 highlight(target);
                 return;
@@ -25,32 +25,61 @@ window.onload = function OnLoad(){
     getCurrentPersistentSums();    
     getCPop();
     getTypeCount("Defense");
-    
+    setCDates();
     tableCreate();
-    console.log("Table Loaded");
+    //console.log("Table Loaded");
+}
+
+
+async function setCDates(){
+    const cke = getCookie("loginCookie");
+    //Get Your Current Date
+    const fetchCD = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Dates/${cke}`)
+    const responseCD = await fetchCD;
+    const jsonDataCD = await responseCD.json();
+    //console.log(jsonDataCD);   
+    
+    const yearc = Math.floor(jsonDataCD.Date1/12);
+    const monthc = jsonDataCD.Date1%12;
+    const CDString = "Month " + monthc + ", Year " + yearc;
+    
+    document.getElementById("Date").innerHTML = CDString;
+
+    //Get The Admin Date
+    const fetchCDA = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Dates/${0}`)
+    const responseCDA = await fetchCDA;
+    const jsonDataCDA = await responseCDA.json();
+    //console.log(jsonDataCDA);   
+
+    const yeara = Math.floor(jsonDataCDA.Date1/12);
+    const montha = jsonDataCDA.Date1%12;
+    const CDStringA = "Month " + montha + ", Year " + yeara;
+    
+    document.getElementById("DateA").innerHTML = CDStringA;
+
 }
 
 
 async function getTypeCount(type){
-    //http://localhost:51299/api/Buildings?uID=18&type=Food
+    //http://citybuilderapi.ddns.net:333/api/Buildings?uID=18&type=Food
     const cke = getCookie("loginCookie")
-        console.log("Reaches GCG") 
-        const fetchResutl = fetch(`http://localhost:51299/api/Buildings?uID=${cke}&type=${type}`)
+        //console.log("Reaches GCG") 
+        const fetchResutl = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Buildings?uID=${cke}&type=${type}`)
         const response = await fetchResutl;
         const jsonData = await response.json();
-        console.log(jsonData);
+        //console.log(jsonData);
         document.getElementById("Security").innerHTML = jsonData;
 }
 
 
 async function getCPop(){
-//http://localhost:51299/api/People/55
+//http://citybuilderapi.ddns.net:333/api/People/55
 const cke = getCookie("loginCookie")
-    console.log("Reaches GCG") 
-    const fetchResutl = fetch(`http://localhost:51299/api/People/${cke}`)
+    //console.log("Reaches GCG") 
+    const fetchResutl = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/People/${cke}`)
     const response = await fetchResutl;
     const jsonData = await response.json();
-    console.log(jsonData);
+    //console.log(jsonData);
     document.getElementById("Pop").innerHTML = jsonData;
     document.getElementById("Reknown").innerHTML = jsonData/2;  
 }
@@ -59,16 +88,16 @@ const cke = getCookie("loginCookie")
 
 async function getCurrentPersistentSums(){
     const cke = getCookie("loginCookie")
-    console.log("Reaches GCG") 
-    const fetchResutl = fetch(`http://localhost:51299/api/PersistentSums/${cke}`)
+    //console.log("Reaches GCG") 
+    const fetchResutl = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/PersistentSums/${cke}`)
     const response = await fetchResutl;
     const jsonData = await response.json();
-    console.log(jsonData);   
+    //console.log(jsonData);   
     document.getElementById("Gold").innerHTML = jsonData.Gold;
     document.getElementById("food").innerHTML = jsonData.Food;
     document.getElementById("Rare").innerHTML = jsonData.RareResources;
 }
-    //http://localhost:51299/api/PersistentSums/{id}
+    //http://citybuilderapi.ddns.net:333/api/PersistentSums/{id}
 
 let selectedTd;
 
@@ -92,8 +121,8 @@ function tableCreate() {
     tbl.style.height = (imageHeight - 30) + "px";
     const cellWidth = imageWidth / 40;
     const cellHeight = imageHeight / 40;
-    console.log("Width: " + imageWidth + " Height: " + imageHeight);
-    console.log("cellWidth: " + cellWidth + " cellHeight: " + cellHeight);
+    //console.log("Width: " + imageWidth + " Height: " + imageHeight);
+    //console.log("cellWidth: " + cellWidth + " cellHeight: " + cellHeight);
 
     for (var i = 0; i < 40; i++) {
         var tr = tbl.insertRow();
@@ -112,7 +141,7 @@ function tableCreate() {
 
 
 function openForm(x, y) {
-  console.log(x, y);
+  //console.log(x, y);
   var div = document.getElementById("myForm");
   div.style.display = "block";
   var xinputForm = document.getElementById("xinput");
@@ -128,7 +157,7 @@ function closeForm() {
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
-    console.log(ca);
+    //console.log(ca);
     
     for(var i=0;i < ca.length;i++) {
 		var c = ca[i];
@@ -148,12 +177,12 @@ async function destroyBuilding(){
     //then delete that building from the map
     //then delete that building from the sql db.
     
-    const fetchresult1 = fetch(`http://localhost:51299/api/VDP?x=${xt}&y=${yt}&UID=${cke}`)
+    const fetchresult1 = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/VDP?x=${xt}&y=${yt}&UID=${cke}`)
     const response = await fetchresult1;
     const jsonData1 = await response.json();
-    console.log(jsonData1);
+    //console.log(jsonData1);
     const bdID = jsonData1.BuildingID;
-    const fetchResult2 = fetch(`http://localhost:51299/api/VDP/${bdID}`,{
+    const fetchResult2 = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/VDP/${bdID}`,{
         method:'Delete',
         mode:'cors',
         headers:{
@@ -161,7 +190,7 @@ async function destroyBuilding(){
             'Content-type' : 'application/json'        
         }})
     const response2 = await fetchResult2;
-    const fetchResult3 = fetch(`http://localhost:51299/api/Buildings/${bdID}`,{
+    const fetchResult3 = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Buildings/${bdID}`,{
         method:'Delete',
         mode:'cors',
         headers:{
@@ -199,14 +228,14 @@ function chooseAction() {
 function getImage(){
     
     var cke =getCookie("loginCookie");
-    console.log("Reaches get Image");
-        fetch(`http://localhost:51299/api/Image?cookie=${cke}`)
+    //console.log("Reaches get Image");
+        fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Image?cookie=${cke}`)
             .then((res)=>res.blob())
             .then((data)=>{
                 var urlCreator = window.URL || window.webkitURL;
 
                 var imgUrl = urlCreator.createObjectURL(data);
-                    console.log("imgurl: " + imgUrl);
+                    //console.log("imgurl: " + imgUrl);
                 document.querySelector("#background").src=imgUrl})
             .catch(error => alert('Error: Incorrect URL Creation'));            
    
@@ -218,16 +247,16 @@ async function buildBuilding(){
 
     const cke =getCookie("loginCookie");
 
-    console.log("Reaches buildBuilding");
+    //console.log("Reaches buildBuilding");
     const xt = document.getElementById("xinput").value;
     const yt = document.getElementById("yinput").value;
     const dl= document.getElementById("ddl2");
     const namet = dl.options[dl.selectedIndex].value;
     
 
-    console.log(cke, xt, yt, namet);
+    //console.log(cke, xt, yt, namet);
 
-    const fetchResutl = fetch('http://localhost:51299/api/Image',{
+    const fetchResutl = fetch('http://citybuilderapi.ddns.net:333/ORMTest/api/Image',{
         method:'Post',
         mode:'cors',
         headers:{
@@ -257,26 +286,26 @@ async function buildBetterBuilding(){
     const namet = dl.options[dl.selectedIndex].value;
 
 //Get Current Levels of Wealth    
-    const fetchWallet = fetch(`http://localhost:51299/api/PersistentSums/${cke}`)
+    const fetchWallet = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/PersistentSums/${cke}`)
     const responseWallet = await fetchWallet;
     const jsonDataWallet = await responseWallet.json();
-    console.log(jsonDataWallet);   
+    //console.log(jsonDataWallet);   
 
 
 //Check if the space is already occupied
-    const fetchOccupied = fetch(`http://localhost:51299/api/VDP?x=${xt}&y=${yt}&UID=${cke}`)
+    const fetchOccupied = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/VDP?x=${xt}&y=${yt}&UID=${cke}`)
     const responseOccupied = await fetchOccupied;
     const jsonDataOccupied = await responseOccupied.json();
-    console.log(jsonDataOccupied);
+    //console.log(jsonDataOccupied);
 
 
 //if no building exists there continue
     if(jsonDataOccupied.BuildingName == "NA"){
         //find cost of desired building
-    const fetchPrice = fetch(`http://localhost:51299/api/BuildingTemplates?name=${namet}`)
+    const fetchPrice = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/BuildingTemplates?name=${namet}`)
     const responsePrice = await fetchPrice;
     const jsonDataPrice = await responsePrice.json();
-    console.log(jsonDataPrice);
+    //console.log(jsonDataPrice);
 
         //check price against current wallet gold
         if(jsonDataPrice.Cost <= jsonDataWallet.Gold)
@@ -290,10 +319,10 @@ async function buildBetterBuilding(){
             const yf = "Y: " + yt + ",";
             const uidf = "UserID: " + cke;
             const buildObj = "{"+ buildType + buildlvl + buildName + xf + yf + buildCost + uidf +"}";
-            console.log(buildObj);
+            //console.log(buildObj);
             //put building into sql
 
-            const fetchSQLBuild = fetch('http://localhost:51299/api/Buildings',{
+            const fetchSQLBuild = fetch('http://citybuilderapi.ddns.net:333/ORMTest/api/Buildings',{
                 method:'Post',
                 mode:'cors',
                 headers:{
@@ -305,12 +334,12 @@ async function buildBetterBuilding(){
                 })         
             const responseSQLBuild = await fetchSQLBuild;
             const jsonDataSQLBuild = await responseSQLBuild.json();
-            console.log(jsonDataSQLBuild);
+            //console.log(jsonDataSQLBuild);
             if(jsonDataSQLBuild.BuildingName != "Bad Model State" )
             {
                 //building is built in SQL 
                 //Need to now build it on the map
-                const fetchMap = fetch(`http://localhost:51299/api/VDP/${jsonDataSQLBuild.BuildingID}`,{
+                const fetchMap = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/VDP/${jsonDataSQLBuild.BuildingID}`,{
                     method:'Put',
                     mode:'cors',
                     headers:{
@@ -339,10 +368,10 @@ async function buildBetterBuilding(){
                         *  
                         */
                        const newG = jsonDataWallet.Gold - jsonDataPrice.Cost;
-                        const stringOShit = JSON.stringify({Gold:newG, Food:jsonDataWallet.Food, RareResources:jsonDataWallet.RareResources,UID:jsonDataWallet.UID,ID:jsonDataWallet.ID});
-                        console.log(stringOShit);
+                        const stringObj2 = JSON.stringify({Gold:newG, Food:jsonDataWallet.Food, RareResources:jsonDataWallet.RareResources,UID:jsonDataWallet.UID,ID:jsonDataWallet.ID});
+                  //      console.log(stringObj2);
 
-                        const fetchMap = fetch(`http://localhost:51299/api/PersistentSums/${jsonDataWallet.ID}`,{
+                        const fetchMap = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/PersistentSums/${jsonDataWallet.ID}`,{
                             method:'Put',
                             mode:'cors',
                             headers:{
@@ -350,7 +379,7 @@ async function buildBetterBuilding(){
                                 'Access-Control-Allow-Origin': '*',
                                 'Content-type' : 'application/json'        
                             },
-                            body:stringOShit
+                            body:stringObj2
                         
                         })      
                         const responseMap = await fetchMap;
@@ -419,48 +448,60 @@ async function rollMonth(){
     //
     //I need to pull wallet to get current gold, current food, 
     //
-    const cke = getCookie("loginCookie");
+
+
+const cke = getCookie("loginCookie");
 //Get Your Current Date
-const fetchCD = fetch(`http://localhost:51299/api/Dates/${cke}`)
+const fetchCD = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Dates/${cke}`)
 const responseCD = await fetchCD;
 const jsonDataCD = await responseCD.json();
-console.log(jsonDataCD);   
+//console.log(jsonDataCD);   
 
 
 
 //Get The Admin Date
-const fetchCDA = fetch(`http://localhost:51299/api/Dates/${cke}`)
+const fetchCDA = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Dates/${0}`)
 const responseCDA = await fetchCDA;
 const jsonDataCDA = await responseCDA.json();
-console.log(jsonDataCDA);   
+//console.log(jsonDataCDA);   
 
+if(jsonDataCD.Date1 < jsonDataCDA.Date1)
+{
 
+//http://citybuilderapi.ddns.net:333/
 //Get Current Levels of Wealth    
-    const fetchWallet = fetch(`http://localhost:51299/api/PersistentSums/${cke}`)
-    const responseWallet = await fetchWallet;
-    const jsonDataWallet = await responseWallet.json();
-    console.log(jsonDataWallet);   
+const fetchWallet = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/PersistentSums/${cke}`)
+const responseWallet = await fetchWallet;
+const jsonDataWallet = await responseWallet.json();
+console.log("Persisten Sums:" + jsonDataWallet);   
 
 //Get Current Population
-    const fetchPop = fetch(`http://localhost:51299/api/People/${cke}`)
-    const responsePop = await fetchPop;
-    const jsonDataPop = await responsePop.json();
-    console.log(jsonDataPop);
+const fetchPop = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/People/${cke}`)
+const responsePop = await fetchPop;
+const jsonDataPop = await responsePop.json();
+console.log("Current Pop Count:" + jsonDataPop);
+if(jsonDataPop >= 1)
+{
+
+
+
 
 //Get New Amount of Food
-    const ftype = "Food";
-    const fetchFood = fetch(`http://localhost:51299/api/Buildings?uID=${cke}&type=${ftype}`)
-    const responseFood = await fetchFood;
-    const jsonDataFood = await responseFood.json();
-    console.log(jsonDataFood);
+const ftype = "Food";
+const fetchFood = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Buildings?uID=${cke}&type=${ftype}`)
+const responseFood = await fetchFood;
+const jsonDataFood = await responseFood.json();
+console.log("Farm Produce:" + jsonDataFood);
 
 //Steps 1 and 2
     let nFood = (jsonDataWallet.Food - jsonDataPop) +  jsonDataFood;
+    console.log("New Food:" + nFood);
 //Steps 3
-    let nWealth = jsonDataWallet.Gold + (jsonDataPop * 100);
+    let nWealth = jsonDataWallet.Gold + (jsonDataPop * 50);
 //Step 4
-    
-    if(jsonDataPop <= nFood)
+        
+    // food: 8 pop : 7 and all similar cases >0
+    if(nFood >= jsonDataPop && jsonDataPop >= 1)
     {
         //when you have enough food for growth
         const popTBAdded = Math.floor(nFood/jsonDataPop);
@@ -468,43 +509,72 @@ console.log(jsonDataCDA);
         //add on the population
         for(var i = 0; i < popTBAdded; i++)
         {
-            addPop();
+            await addPop();
         }
 
+    } // food: -X and Pop: 10 
+    else if(nFood <= 0 && jsonDataPop >= 1)
+    {
+        var food = 1;
+        const popTL = ~~(jsonDataPop/food);
+        const popTTL = Math.abs(popTL);
+
+        
+        for(var j = 0; j < popTTL; j++)
+        {
+            await RemovePop(jsonDataWallet.UID);
+        }
+    } //f 3 p 6
+    else if(nFood >= 1 && jsonDataPop >= 1)
+    {
+        const popTL = ~~(jsonDataPop/nFood);
+        const popTTL = Math.abs(popTL);
+
+        for(var j = 0; j < popTTL; j++)
+        {
+            await RemovePop(jsonDataWallet.UID);
+        }
     }
-    else{
-        //when you don't have enough food for growth
-        const popTL = Math.floor(jsonDataPop/nFood);
-            //Remove the population
-            for(var i = 0; i < popTL; i++)
-            {
-                RemovePop(jsonDataWallet.UID);
-            }
+    else
+    {
+        alert("No population remaining you have lost");
+
     }
+        
+    
 
     const stringObj = JSON.stringify({Gold:nWealth, Food:nFood, RareResources:jsonDataWallet.RareResources,UID:jsonDataWallet.UID,ID:jsonDataWallet.ID});
     updateWallet(stringObj, jsonDataWallet.ID);
     //if you haven't reached current day
+    //console.log(jsonDataCD.Date1, jsonDataCDA.Date1)
     if(jsonDataCD.Date1 < jsonDataCDA.Date1)
     {
         let cday = jsonDataCD.Date1 + 1;
         const datObj = JSON.stringify({ID:jsonDataCD.ID, Date1: cday, UID: jsonDataCD.UID});
-        rollDay(datObj, jsonDataCD.ID);
+        await rollDay(datObj, jsonDataCD.ID);
 
     }
     else
     {
         alert("Current Time Reached")
     }
-     
+    location.reload();
+}
+else{
+    alert("You have no more people you have lost")
+}
+}
+else{
+alert("Current Time Reached")
+}    
 
 
 
 }
 
-
 async function addPop(){
-    const fetchPop = fetch('http://localhost:51299/api/People',{
+    const cke = getCookie("loginCookie");
+    const fetchPop = fetch('http://citybuilderapi.ddns.net:333/ORMTest/api/People',{
         method:'Post',
         mode:'cors',
         headers:{
@@ -518,7 +588,7 @@ async function addPop(){
 }
 
 async function RemovePop(UID){
-    const fetchPop = fetch(`http://localhost:51299/api/People?UID=${UID}`,{
+    const fetchPop = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/People?UID=${UID}`,{
         method:'DELETE',
         mode:'cors',
         headers:{
@@ -531,7 +601,7 @@ async function RemovePop(UID){
 
 async function updateWallet(stringObj, ID){
 
-    const fetchMap = fetch(`http://localhost:51299/api/PersistentSums/${ID}`,{
+    const fetchMap = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/PersistentSums/${ID}`,{
         method:'Put',
         mode:'cors',
         headers:{
@@ -547,7 +617,7 @@ async function updateWallet(stringObj, ID){
 }
 
 async function rollDay(datObj, ID){
-    const fetchMap = fetch(`http://localhost:51299/api/Dates/${ID}`,{
+    const fetchMap = fetch(`http://citybuilderapi.ddns.net:333/ORMTest/api/Dates/${ID}`,{
         method:'Put',
         mode:'cors',
         headers:{
@@ -560,4 +630,7 @@ async function rollDay(datObj, ID){
     const responseMap = await fetchMap;
 }
 
-
+function prepHref(linkElement) {
+    var myImage = document.getElementById('background');
+    linkElement.href = myImage.src;
+}

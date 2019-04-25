@@ -23,7 +23,12 @@ body {
   height: 1201px;
 }
 
+#GetToLeft{
+  z-index: 10;
+  background-color: #4CAF50;
+  border-color: #4CAF50;
 
+}
 
 .mySlides {display: none}
 

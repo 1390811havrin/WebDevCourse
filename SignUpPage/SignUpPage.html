@@ -30,22 +30,22 @@
                                 <div>
                                          <hr>
                                        
-                                         <input type="text" id="addEml" placeholder="Email Address" >
+                                         <input type="text" id="addEml" placeholder="UserName" required>
                                 </div>
                                          <hr id = "hr1">
                                 <div>
                                         
-                                         <input type="password" id="addPSW" placeholder="Password" >
+                                         <input type="password" id="addPSW" placeholder="Password" required>
                                          <hr id = "hr2">
                                       
-                                         <input type="password" id="addPSWR" placeholder="Repeat Password" >
+                                         <input type="password" id="addPSWR" placeholder="Repeat Password" required>
                                 </div>
                                          <hr id = "hr2">
                                          <input type="submit" value="Submit">
                         </form>
 
                         <hr>
-                        <a href="http://127.0.0.1:5500/loginpage/LoginPage.html">Return To Login Page</a>
+                        <a href="../loginpage/LoginPage.html">Return To Login Page</a>
     </div>
     <div  id = "cb">
             
@@ -62,7 +62,7 @@
     </div>
 
     <script>
-    document.getElementById('addUser').addEventListener('submit', postNewUser);
+    document.getElementById('addUser').addEventListener('submit', wrapNewUser);
     </script>
 
   </body>
